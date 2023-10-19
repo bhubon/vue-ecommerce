@@ -2,7 +2,9 @@
 <script setup>
 import { ref, reactive, onBeforeMount } from 'vue'
 import axios from 'axios'
+import { wishlist } from '../store/wishlist';
 import { cart } from '../store/cart';
+import WishlistIcon from './WishlistIcon.vue';
 
 const products = ref([])
 
@@ -11,12 +13,18 @@ onBeforeMount(() => {
         .then(res => {
             products.value = res.data
         })
+
+
+    wishlist.fetchWishlist();
 })
 </script>
 <template>
     <div class="bg-white">
         <div class="mx-auto">
             <h2 class="text-2xl font-bold tracking-tight text-gray-900">Productsed</h2>
+
+            {{ wishlist.items }}
+
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 <div v-for="product in products" :key="product.id" class="group relative">
                     <div
@@ -34,9 +42,13 @@ onBeforeMount(() => {
                         </div>
                         <p class="text-sm font-medium text-gray-900">${{ product.price }}</p>
                     </div>
-                    <button @click="cart.addToCart(product)" class="bg-blue-500 text-white p-2 rounded mt-2">
-                        Add To Cart
-                    </button>
+                    <div class="flex justify-center items-center">
+                        <button @click="cart.addToCart(product)" class="bg-blue-500 text-white p-2 rounded mt-2 mr-4">
+                            Add To Cart
+                        </button>
+                        <WishlistIcon :product="product" />
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ import { authStore } from '../store/store';
 const auth = authStore;
 
 
-const email = ref('');
+const email = ref('jane@doe.com');
 const password = ref('');
 
 </script>
