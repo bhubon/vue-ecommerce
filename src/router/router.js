@@ -8,6 +8,7 @@ import Sidebar from '../components/Sidebar.vue'
 import Protected from '../components/Protected.vue'
 import Login from '../components/Login.vue'
 import Cart from '../components/Cart.vue'
+import Orders from '../components/Orders.vue'
 
 import { authStore } from '../store/store'
 
@@ -59,6 +60,15 @@ const routes = [
     {
         path: '/protected', components: {
             default: Protected,
+            LeftSideBar: Sidebar,
+        },
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/orders', components: {
+            default: Orders,
             LeftSideBar: Sidebar,
         },
         meta: {

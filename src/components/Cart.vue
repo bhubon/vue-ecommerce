@@ -1,8 +1,8 @@
 //create home component
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive,onBeforeMount } from 'vue'
 import { cart } from '../store/cart';
-
+import { order } from '../store/order'
 
 </script>
 <template>
@@ -10,7 +10,6 @@ import { cart } from '../store/cart';
         <div class="mx-auto px-12 py-8 ">
             <h2 class="text-2xl font-bold tracking-tight text-gray-900">Cart</h2>
             <p class="my-10">
-                <!-- {{ cart }} -->
             </p>
             <div>
                 <div class="flex items-center my-5" v-for="item in cart.items" :key="item.id">
@@ -46,6 +45,11 @@ import { cart } from '../store/cart';
                 <button @click="cart.emptyCart()"
                     class="ml-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                     Empty Cart
+                </button>
+
+                <button @click="cart.checkout()"
+                    class="ml-5 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    Place Order
                 </button>
             </div>
         </div>
